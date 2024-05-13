@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.infosociety</groupId>
+    <artifactId>social</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <relativePath>..</relativePath>
+  </parent>
+  <groupId>com.infosociety.social</groupId>
+  <artifactId>social-ui</artifactId>
+  <name>social-ui</name>
+  <properties>
+    <frontend.source>src/main/ui</frontend.source>
+    <frontend.build>build</frontend.build>
+  </properties>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>exec-maven-plugin</artifactId>
+        <version>3.2.0</version>
+        <configuration>
+          <useMavenLogger>true</useMavenLogger>
+          <workingDirectory>${frontend.source}</workingDirectory>
+          <executable>npm</executable>
+        </configuration>
+        <executions>
+          <execution>
+            <id>npm-install</id>
+            <phase>generate-resources</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <configuration>
+              <arguments>
+                <argument>install</argument>
+              </arguments>
+            </configuration>
+          </execution>
+          <execution>
+            <id>npm-run-build</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>exec</goal>
+            </goals>
+            <configuration>
+              <arguments>
+                <argument>run</argument>
+                <argument>build</argument>
+              </arguments>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-antrun-plugin</artifactId>
+        <version>3.1.0</version>
+        <executions>
+          <execution>
+            <id>prepare-package</id>
+            <phase>prepare-package</phase>
+            <configuration>
+              <target>
+                <mkdir dir="target/classes/static"/>
+                <copy todir="target/classes/static">
+                  <fileset dir="${frontend.source}/${frontend.build}">
+                    <include name="**"/>
+                  </fileset>
+                </copy>
+              </target>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>clean</id>
+            <phase>pre-clean</phase>
+            <configuration>
+              <target>
+                <delete dir="${frontend.source}/${frontend.build}"/>
+              </target>
+            </configuration>
+            <goals>
+              <goal>run</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+</project>

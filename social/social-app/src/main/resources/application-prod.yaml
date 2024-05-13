@@ -1,0 +1,33 @@
+spring:
+  liquibase:
+    enabled: true
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: ${POSTGRES_URL}
+    username: ${POSTGRES_USERNAME}
+    password: ${POSTGRES_PASSWORD}
+  # JPA properties
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQL10Dialect
+  http:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+security:
+  application:
+    key: ${API_KEY}
+
+server:
+  port: 8080
+
+management:
+  endpoint:
+    logfile:
+      external-file: logs/social-service.log
+

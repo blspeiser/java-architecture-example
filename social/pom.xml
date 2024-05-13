@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.infosociety</groupId>
+  <artifactId>social</artifactId>
+  <packaging>pom</packaging>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>social</name>
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <spring.core.version>5.2.1.RELEASE</spring.core.version>
+    <spring.data.version>2.2.1.RELEASE</spring.data.version>
+    <jakarta.annotations.version>1.3.5</jakarta.annotations.version>
+    <jakarta.persistence.version>2.2.3</jakarta.persistence.version>
+    <slf4j.version>1.7.36</slf4j.version>
+  </properties>
+  <modules>
+    <module>social-core</module>
+    <module>social-util</module>
+    <module>social-base</module>
+    <module>social-persistence</module>
+    <module>social-rest</module>
+    <module>social-ui</module>
+    <module>social-app</module>
+  </modules>
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.11</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+</project>
