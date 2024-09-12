@@ -45,6 +45,9 @@ public class SearchController {
       SearchExpertsResponse response = new SearchExpertsResponse();
       response.experts = this.service.searchExperts(criteria);
       return ResponseEntity.ok(response);
+    } catch(IllegalArgumentException e) {
+      log.debug("Invalid request while searching experts", e);
+      return ResponseEntity.status(400).build();
     } catch(Exception e) {
       log.error("Unexpected error while searching experts", e);
       return ResponseEntity.status(500).build();
@@ -61,6 +64,9 @@ public class SearchController {
       SearchExpertiseResponse response = new SearchExpertiseResponse();
       response.expertise = this.service.searchExpertise(criteria);
       return ResponseEntity.ok(response);
+    } catch(IllegalArgumentException e) {
+      log.debug("Invalid request while searching expertise", e);
+      return ResponseEntity.status(400).build();
     } catch(Exception e) {
       log.error("Unexpected error while searching expertise", e);
       return ResponseEntity.status(500).build();
@@ -77,7 +83,10 @@ public class SearchController {
       SearchCountriesResponse response = new SearchCountriesResponse();
       response.countries = this.service.searchCountries(criteria);
       return ResponseEntity.ok(response);
-    } catch(Exception e) {
+    } catch(IllegalArgumentException e) {
+	  log.debug("Invalid request while searching countries", e);
+	  return ResponseEntity.status(400).build();
+	} catch(Exception e) {
       log.error("Unexpected error while searching countries", e);
       return ResponseEntity.status(500).build();
     }
